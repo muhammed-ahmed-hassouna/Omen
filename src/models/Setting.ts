@@ -31,21 +31,22 @@ export class SettingModel {
       map.set(r.key, r.value);
     }
 
+    const env = process.env;
     return {
-      googleSheetUrl: map.get('googleSheetUrl') || '',
-      googleSheetWebhookUrl: map.get('googleSheetWebhookUrl') || '',
-      wppconnectUrl: map.get('wppconnectUrl') || 'http://localhost:21465',
-      sendDelaySeconds: map.has('sendDelaySeconds') ? parseInt(map.get('sendDelaySeconds')!, 10) : 45,
-      delayRandomJitter: map.has('delayRandomJitter') ? parseInt(map.get('delayRandomJitter')!, 10) : 20,
+      googleSheetUrl: map.get('googleSheetUrl') || env.GOOGLE_SHEET_URL || '',
+      googleSheetWebhookUrl: map.get('googleSheetWebhookUrl') || env.GOOGLE_SHEET_WEBHOOK_URL || '',
+      wppconnectUrl: map.get('wppconnectUrl') || (env.WPP_HOST && env.WPP_PORT ? `${env.WPP_HOST}:${env.WPP_PORT}` : (env.WPP_URL || 'http://localhost:21465')),
+      sendDelaySeconds: map.has('sendDelaySeconds') ? parseInt(map.get('sendDelaySeconds')!, 10) : (env.SEND_DELAY_SECONDS ? parseInt(env.SEND_DELAY_SECONDS, 10) : 20),
+      delayRandomJitter: map.has('delayRandomJitter') ? parseInt(map.get('delayRandomJitter')!, 10) : (env.DELAY_RANDOM_JITTER ? parseInt(env.DELAY_RANDOM_JITTER, 10) : 5),
       maxBatchLimit: map.has('maxBatchLimit') ? parseInt(map.get('maxBatchLimit')!, 10) : 0,
-      wppSessionName: map.get('wppSessionName') || 'leads-hunter',
-      dailyMessageCap: map.has('dailyMessageCap') ? parseInt(map.get('dailyMessageCap')!, 10) : 40,
-      batchCooldownEvery: map.has('batchCooldownEvery') ? parseInt(map.get('batchCooldownEvery')!, 10) : 15,
-      batchCooldownMinSeconds: map.has('batchCooldownMinSeconds') ? parseInt(map.get('batchCooldownMinSeconds')!, 10) : 180,
-      batchCooldownMaxSeconds: map.has('batchCooldownMaxSeconds') ? parseInt(map.get('batchCooldownMaxSeconds')!, 10) : 420,
-      sendWindowStart: map.has('sendWindowStart') ? parseInt(map.get('sendWindowStart')!, 10) : 9,
-      sendWindowEnd: map.has('sendWindowEnd') ? parseInt(map.get('sendWindowEnd')!, 10) : 20,
-      enableMessageVariation: map.has('enableMessageVariation') ? map.get('enableMessageVariation') !== 'false' : true,
+      wppSessionName: map.get('wppSessionName') || env.WPP_SESSION_NAME || 'leads-hunter',
+      dailyMessageCap: map.has('dailyMessageCap') ? parseInt(map.get('dailyMessageCap')!, 10) : (env.DAILY_MESSAGE_CAP ? parseInt(env.DAILY_MESSAGE_CAP, 10) : 40),
+      batchCooldownEvery: map.has('batchCooldownEvery') ? parseInt(map.get('batchCooldownEvery')!, 10) : (env.BATCH_COOLDOWN_EVERY ? parseInt(env.BATCH_COOLDOWN_EVERY, 10) : 15),
+      batchCooldownMinSeconds: map.has('batchCooldownMinSeconds') ? parseInt(map.get('batchCooldownMinSeconds')!, 10) : (env.BATCH_COOLDOWN_MIN_SECONDS ? parseInt(env.BATCH_COOLDOWN_MIN_SECONDS, 10) : 180),
+      batchCooldownMaxSeconds: map.has('batchCooldownMaxSeconds') ? parseInt(map.get('batchCooldownMaxSeconds')!, 10) : (env.BATCH_COOLDOWN_MAX_SECONDS ? parseInt(env.BATCH_COOLDOWN_MAX_SECONDS, 10) : 420),
+      sendWindowStart: map.has('sendWindowStart') ? parseInt(map.get('sendWindowStart')!, 10) : (env.SEND_WINDOW_START ? parseInt(env.SEND_WINDOW_START, 10) : 9),
+      sendWindowEnd: map.has('sendWindowEnd') ? parseInt(map.get('sendWindowEnd')!, 10) : (env.SEND_WINDOW_END ? parseInt(env.SEND_WINDOW_END, 10) : 20),
+      enableMessageVariation: map.has('enableMessageVariation') ? map.get('enableMessageVariation') !== 'false' : (env.ENABLE_MESSAGE_VARIATION !== 'false'),
     };
   }
 

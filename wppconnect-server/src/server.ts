@@ -12,7 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+if (typeof (process as any).loadEnvFile === 'function') {
+  try { (process as any).loadEnvFile(); } catch {}
+  try { (process as any).loadEnvFile('../.env'); } catch {}
+}
+
 import config from './config';
 import { initServer } from './index';
 

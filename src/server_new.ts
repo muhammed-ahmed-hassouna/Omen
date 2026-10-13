@@ -1,3 +1,11 @@
+if (typeof (process as any).loadEnvFile === 'function') {
+  try {
+    (process as any).loadEnvFile();
+  } catch {
+    // ignore if .env is missing
+  }
+}
+
 import express from 'express';
 import path from 'path';
 import { apiRouter } from './routes';
