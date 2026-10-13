@@ -5,7 +5,10 @@
   "main": "dist/server_new.js",
   "scripts": {
     "dev": "nodemon --watch src -e ts --exec ts-node src/server_new.ts",
+    "dev:ui": "cd frontend && npm run dev",
     "build": "tsc",
+    "build:ui": "cd frontend && npm run build",
+    "build:all": "tsc && npm run build:ui",
     "start": "node dist/server_new.js"
   },
   "keywords": [
