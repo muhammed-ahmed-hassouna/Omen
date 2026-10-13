@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment & Sensitive Credentials
+.env
+.env.*
+!.env.example
+notes.txt
+*.pem
+*.key
+
+# SQLite Database & Storage
+data/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite*
+*.backup*
+
+# Build Artifacts
+dist/
+build/
+
+# WhatsApp Gateway Session Data & Bloat (WPPConnect)
+wppconnect-server/tokens/
+wppconnect-server/wppconnect_tokens/
+wppconnect-server/userDataDir/
+wppconnect-server/WhatsAppImages/
+wppconnect-server/log/
+wppconnect-server/dist/
+wppconnect-server/*.zip
+*.zip
+tokens/
+userDataDir/
+WhatsAppImages/
+
+# Local Logs & Scratch Scripts
+logs/
+*.log
+scratch/
+temp/
+tmp/
+
+# Data Exports & Leads
+*.csv
+*.xlsx
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
